@@ -1,0 +1,113 @@
+.game{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: repeat(3, 150px);
+    grid-template-rows: repeat(3, 150px);
+    justify-content: center;
+    /* box-shadow: 0px 0px 43px 17px rgba(153, 153, 153, 1); */
+    margin-top: 3%;
+}
+
+.sqr{
+    font-size: 70px;
+    color: brown;
+    font-weight: bold;
+    border: 3px solid green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.sqr:hover{
+    background-color: gainsboro;
+}
+
+.no-border-top{
+    border-top: none;
+}
+
+.no-border-bottom{
+    border-bottom: none;
+}
+
+.no-border-right{
+    border-right: none;
+}
+
+.no-border-left{
+    border-left: none;
+}
+
+.reset-btn{
+    margin-top: 10px;
+    width: 300px;
+    height: 40px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    /* margin-left: 270px; */
+    font-size: 30px;
+    color: rgb(69, 171, 26);
+    font-weight: bolder;
+}
+
+.scores{
+    display: flex;
+}
+
+.X-box{
+    display: flex;
+    border: none solid black;
+    width: 200px;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    font-weight: bold;
+    color: brown;
+}
+
+.O-box{
+    display: flex;
+    border: none solid black;
+    width: 200px;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    font-weight: bold;
+    color: brown;
+}
+
+.XScore{
+    text-align: right;
+}
+
+.OScore{
+    text-align: right;
+}
+
+.turn{
+    display: flex;
+    width: 400px;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin-top: 2%;
+}
+
+.result{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
