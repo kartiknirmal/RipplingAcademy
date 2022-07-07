@@ -6,6 +6,7 @@ class Player:
 
     def get_next_input(self):
         print("Player", self.turn, "turn")
-        x = int(input("Enter x coordinate: "))
-        y = int(input("Enter y coordinate: "))
+        string_input = input("Enter point coordinate: ").split(',')
+        x = int(string_input[0])
+        y = int(string_input[1])
         return x, y
