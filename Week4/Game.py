@@ -1,6 +1,9 @@
 import Player as player
 
 class Game:
+
+    no_of_col = 3
+
     def __init__(self):
         self.board = self.Board()
         sym1 = input("Symbol for Player 1: ")
@@ -13,7 +16,7 @@ class Game:
         self.player1 = player.Player(1, sym1)
         self.player2 = player.Player(2, sym2)
 
-    def __check_row(self) -> bool:                # return if game should continue.
+    def check_row(self) -> bool:                # return if game should continue.
         for x in self.board.cells:
             if ' ' in x:
                 pass
@@ -23,8 +26,8 @@ class Game:
 
         return False
 
-    def __check_col(self) -> bool:
-        for x in range(3):
+    def check_col(self) -> bool:
+        for x in range(self.no_of_col):
             if self.board.cells[0][x] == ' ':
                 pass
             else:
@@ -32,7 +35,7 @@ class Game:
                     return True
         return False
 
-    def __check_diagonal(self) -> bool:
+    def check_diagonal(self) -> bool:
         if self.board.cells[0][0] == ' ':
             pass
         else:
@@ -47,8 +50,8 @@ class Game:
 
         return False
 
-    def __check_result(self):
-        return self.__check_row() or self.__check_col() or self.__check_diagonal()
+    def check_result(self):
+        return self.check_row() or self.check_col() or self.check_diagonal()
 
     def start(self):
         turn = 1
@@ -71,7 +74,7 @@ class Game:
                 else:
                     print("Cell occupied!!! Select another cell")
 
-            game_win = self.__check_result()
+            game_win = self.check_result()
             if game_win:
                 self.board.show()
                 print("Player", 2 if turn % 2 else 1, "wins.")
