@@ -6,9 +6,12 @@ from django.http import JsonResponse, HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-# Create your views here.
+from item.models import Item
 from restaurant.models import Restaurant
 from restaurant.serializers import RestaurantSerializer
+
+# Create your views here.
+
 import pymongo
 
 # client = pymongo.MongoClient("mongodb+srv://root:root@cluster0.id3knfj.mongodb.net/?retryWrites=true&w=majority", tlsCAFile=certifi.where())
@@ -20,8 +23,14 @@ import pymongo
 
 @api_view(['GET'])
 def api_overview(request):
+    api_urls=[
+        "getall/",
+        "create/",
+        "delete/<pk>",
+        "get/<pk>"
+    ]
 
-    return Response("ABCD")
+    return Response(api_urls)
 
 
 @api_view(['GET'])
@@ -40,11 +49,34 @@ def create_restaurant(request):
         new_restaurant.rating = params["rating"]
         new_restaurant.cuisines = params["cuisines"]
         new_restaurant.address = params["address"]
-        new_restaurant.save()
-        return Response("restaurant created", status=200)
+        rest_id = new_restaurant.save().id
+        return Response("restaurant created with id {}".format(rest_id), status=200)
 
     except:
         return Response("All attributes not filled", status=400)
-#     new_restaurant = {"name": request.POST['name'], "rating": request.POST['rating']}
-#     restaurant.insert_one(new_restaurant)
-#
+
+
+@api_view(['DELETE'])
+def delete_restaurant(request, pk):
+    Item.objects(restaurant_id=pk).delete()
+    Restaurant.objects(id=pk).delete()
+    return Response("Restaurant Deleted successfully")
+
+
+@api_view(['GET'])
+def get_restaurant_by_ID(request, pk):
+    try:
+        try:
+            restaurant_by_ID = Restaurant.objects.get(id=pk)
+            return Response(RestaurantSerializer(restaurant_by_ID, many=False).data, status=200)
+        except Restaurant.DoesNotExist:
+            return Response("No such restaurant exist.", status=200)
+
+    except:
+        return Response("Some error occurred", status=500)
+
+
+
+
+
+
